@@ -16,15 +16,14 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/polyforgery/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "polymc": [
-      "com.campersamu.polyforgery.Init"
+      "com.campersamu.polyforgery.PolyForgery"
     ],
     "main": [
-      "com.campersamu.polyforgery.Init"
+      "com.campersamu.polyforgery.PolyForgery"
     ]
   },
   "mixins": [
@@ -33,14 +32,13 @@
 
   "depends": {
     "fabricloader": "*",
-    "fabric": "*",
-    "minecraft": ">=1.19.3",
-    "polymc": ">=5.3.0",
-    "alloy_forgery": ">=2.0.18",
+    "fabric-api": "*",
+    "minecraft": ">=1.20.2",
+    "polymc": ">=5.4.0",
+    "alloy_forgery": ">=2.0.22",
     "java": ">=17"
   },
   "suggests": {
-    "shoutout": "*",
-    "polydex": ">=0.2.0"
+    "polydex": ">=1.0.0"
   }
 }

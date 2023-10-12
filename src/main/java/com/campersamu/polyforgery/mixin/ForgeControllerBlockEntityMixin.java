@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import wraith.alloyforgery.block.ForgeControllerBlock;
 import wraith.alloyforgery.block.ForgeControllerBlockEntity;
 
-@Mixin(ForgeControllerBlockEntity.class)
+@Mixin(value = ForgeControllerBlockEntity.class, remap = false)
 public abstract class ForgeControllerBlockEntityMixin extends BlockEntity {
     @Shadow @Final private Direction facing;
 

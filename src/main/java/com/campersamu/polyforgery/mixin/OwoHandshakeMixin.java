@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("UnstableApiUsage")
-@Mixin(OwoHandshake.class)
+@Mixin(value = OwoHandshake.class, remap = false)
 public abstract class OwoHandshakeMixin {
     @Shadow private static boolean HANDSHAKE_REQUIRED;
 

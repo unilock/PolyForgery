@@ -12,7 +12,7 @@ import wraith.alloyforgery.AlloyForgeScreenHandler;
 
 import java.util.List;
 
-import static com.campersamu.polyforgery.Init.id;
+import static com.campersamu.polyforgery.PolyForgery.id;
 
 public class ForgeGui extends SimpleGui {
     private final AlloyForgeScreenHandler base;
