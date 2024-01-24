@@ -39,7 +39,7 @@ public class PolyForgery implements PolyMcEntrypoint, ModInitializer {
     @Override
     public void onInitialize() {
         if (FabricLoader.getInstance().isModLoaded("polydex")){
-            LOGGER.info("[PolyForgery] Adding recipe screen to Polydex...");
+            LOGGER.info("Adding recipe screen to Polydex...");
             AlloyForgeryRecipeView.init();
         }
     }

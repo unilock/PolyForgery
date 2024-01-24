@@ -28,6 +28,12 @@ public class AlloyForgeryRecipeView extends AbstractRecipePolydexPage<AlloyForge
         PolydexPage.registerRecipeViewer(AlloyForgeRecipe.class, AlloyForgeryRecipeView::new);
     }
 
+    // TODO: Custom texture
+    //@Override
+    //public @Nullable Text texture(ServerPlayerEntity player) {
+    //    return InternalPageTextures.CRAFTING;
+    //}
+
     @Override
     public ItemStack typeIcon(ServerPlayerEntity player) {
         return new GuiElementBuilder(Items.BRICKS)
@@ -43,11 +49,10 @@ public class AlloyForgeryRecipeView extends AbstractRecipePolydexPage<AlloyForge
     public void createPage(@Nullable PolydexEntry entry, ServerPlayerEntity player, PageBuilder builder) {
         DefaultedList<Ingredient> ingredients = recipe.getIngredients();
 
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < Math.min(ingredients.size(), 9); ++i) {
             builder.setIngredient(i % 3 + 2, i / 3 + 1, ingredients.get(i));
         }
 
-        //noinspection deprecation
-        builder.setOutput(6, 2, recipe.getOutput());
+        builder.setOutput(6, 2, recipe.getBaseResult());
     }
 }
