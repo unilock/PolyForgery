@@ -8,6 +8,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,9 +26,8 @@ public abstract class ForgeControllerBlockEntityMixin extends BlockEntity {
         super(type, pos, state);
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;updateComparators(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;)V"))
+    @Inject(method = "tick", at = @At(value = "HEAD"))
     private void polySmokeParticles(CallbackInfo ci) {
-        assert this.world != null;
         BlockState currentState = this.world.getBlockState(this.pos);
         if (currentState.get(ForgeControllerBlock.LIT) && this.world instanceof ServerWorld serverWorld) {
             Vec3d center = Vec3d.ofCenter(this.pos).add(Vec3d.of(this.facing.getOpposite().getVector()));
@@ -40,7 +40,7 @@ public abstract class ForgeControllerBlockEntityMixin extends BlockEntity {
         }
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lio/wispforest/owo/particles/systems/ParticleSystem;spawn(Lnet/minecraft/world/World;Lnet/minecraft/util/math/Vec3d;Ljava/lang/Object;)V"))
+    @Inject(method = "tick", at = @At(value = "FIELD", target = "wraith/alloyforgery/AlloyForgery.FORGE_PARTICLES:Lio/wispforest/owo/particles/systems/ParticleSystem;", opcode = Opcodes.GETSTATIC))
     private void polyFlameParticles(CallbackInfo ci) {
         if (this.world instanceof ServerWorld serverWorld) {
             var flamePos = Vec3d.ofCenter(this.pos).add(this.facing.getOffsetX() * 0.5, -0.2, this.facing.getOffsetZ() * 0.5);
