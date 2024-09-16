@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.5-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -7,50 +7,47 @@ version = "${project.mod_version}+${project.minecraft_version}"
 group = project.maven_group
 
 base {
-    archivesName = project.archives_base_name
+	archivesName = project.archives_base_name
 }
 
 repositories {
-    maven { url = 'https://maven.nucleoid.xyz/' }
-    maven {
-        url = 'https://maven.theepicblock.nl'
-        content {
-            includeGroup 'nl.theepicblock'
-        }
-    }
-    maven {
-        name = 'Modrinth'
-        url = 'https://api.modrinth.com/maven'
-        content {
-            includeGroup 'maven.modrinth'
-        }
-    }
-//    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
-//    maven { url = 'https://jitpack.io' }
+	maven {
+		name = 'Nucleoid'
+		url = 'https://maven.nucleoid.xyz/'
+	}
+	maven {
+		name = 'TheEpicBlock'
+		url = 'https://maven.theepicblock.nl'
+		content {
+			includeGroup 'nl.theepicblock'
+		}
+	}
+	maven {
+		name = 'Modrinth'
+		url = 'https://api.modrinth.com/maven'
+		content {
+			includeGroup 'maven.modrinth'
+		}
+	}
 }
 
 dependencies {
-    // To change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	// To change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation("nl.theepicblock:PolyMc:${project.polymc_version}") {
-        exclude group: 'org.quiltmc'
-    }
-    modImplementation "maven.modrinth:alloy-forgery:${project.alloy_forgery_version}"
-    modImplementation "maven.modrinth:owo-lib:${project.owo_version}"
-    modImplementation "eu.pb4:polydex:${project.polydex_version}"
-    modImplementation "eu.pb4:sgui:${project.sgui_version}"
-//    modRuntimeOnly "eu.pb4:player-data-api:${project.player_data_version}"
-//    modRuntimeOnly "eu.pb4:sidebar-api:${project.sidebar_version}"
-//    modRuntimeOnly "fr.catcore:server-translations-api:${project.translations_version}"
-//    modRuntimeOnly "me.lucko:fabric-permissions-api:${project.permissions_version}"
-//    modRuntimeOnly "xyz.nucleoid:more-codecs:${project.codecs_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation("nl.theepicblock:PolyMc:${project.polymc_version}") {
+		exclude group: "org.quiltmc"
+	}
+	modImplementation "maven.modrinth:alloy-forgery:${project.alloy_forgery_version}"
+	modImplementation "maven.modrinth:owo-lib:${project.owo_version}"
+	modImplementation "eu.pb4:polydex:${project.polydex_version}"
+	modImplementation "eu.pb4:sgui:${project.sgui_version}"
 
-    // Resource pack host testing
-    modRuntimeOnly "eu.pb4:polymer-bundled:${project.polymer_version}"
+	// Resource pack host testing
+	modRuntimeOnly "eu.pb4:polymer-bundled:${project.polymer_version}"
 }
 
 processResources {
@@ -63,14 +60,14 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
 	withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {

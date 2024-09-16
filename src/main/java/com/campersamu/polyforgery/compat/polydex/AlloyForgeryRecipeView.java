@@ -5,6 +5,8 @@ import eu.pb4.polydex.api.v1.recipe.PageBuilder;
 import eu.pb4.polydex.api.v1.recipe.PolydexEntry;
 import eu.pb4.polydex.api.v1.recipe.PolydexPage;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.LoreComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -17,6 +19,7 @@ import net.minecraft.util.collection.DefaultedList;
 import org.jetbrains.annotations.Nullable;
 import wraith.alloyforgery.recipe.AlloyForgeRecipe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlloyForgeryRecipeView extends AbstractRecipePolydexPage<AlloyForgeRecipe> {
@@ -53,6 +56,12 @@ public class AlloyForgeryRecipeView extends AbstractRecipePolydexPage<AlloyForge
             builder.setIngredient(i % 3 + 2, i / 3 + 1, ingredients.get(i));
         }
 
-        builder.setOutput(6, 2, recipe.getBaseResult());
+        List<ItemStack> outputs = new ArrayList<>();
+        recipe.getTierOverrides().forEach((overrideRange, itemStack) -> {
+            ItemStack output = itemStack.copy();
+            output.set(DataComponentTypes.LORE, new LoreComponent(List.of(Text.translatable("polyforgery.tier_override", overrideRange.toString()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)))));
+            outputs.add(output);
+        });
+        builder.setOutput(6, 2, outputs.toArray(new ItemStack[0]));
     }
 }

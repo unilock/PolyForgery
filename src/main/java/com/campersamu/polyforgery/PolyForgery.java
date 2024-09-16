@@ -7,6 +7,7 @@ import io.github.theepicblock.polymc.api.PolyRegistry;
 import io.github.theepicblock.polymc.api.resource.ModdedResources;
 import io.github.theepicblock.polymc.api.resource.PolyMcResourcePack;
 import io.github.theepicblock.polymc.api.resource.SoundAsset;
+import io.github.theepicblock.polymc.api.resource.TextureAsset;
 import io.github.theepicblock.polymc.impl.misc.logging.SimpleLogger;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -25,10 +26,11 @@ public class PolyForgery implements PolyMcEntrypoint, ModInitializer {
         pack.setAsset(MOD_ID, "font/gui.json", new SoundAsset(() -> moddedResources.getInputStream(MOD_ID, "font/gui.json")));
         pack.setAsset(MOD_ID, "font/lava.json", new SoundAsset(() -> moddedResources.getInputStream(MOD_ID, "font/lava.json")));
         pack.setAsset(MOD_ID, "font/smelt.json", new SoundAsset(() -> moddedResources.getInputStream(MOD_ID, "font/smelt.json")));
-        pack.setAsset(MOD_ID, "textures/gui/forge_controller.png",  new SoundAsset(() -> moddedResources.getInputStream(MOD_ID, "textures/gui/forge_controller.png")));
-        pack.setAsset(MOD_ID, "textures/gui/fuel.png",  new SoundAsset(() -> moddedResources.getInputStream(MOD_ID, "textures/gui/fuel.png")));
-        pack.setAsset(MOD_ID, "textures/gui/lava.png",  new SoundAsset(() -> moddedResources.getInputStream(MOD_ID, "textures/gui/lava.png")));
-        pack.setAsset(MOD_ID, "textures/gui/smelt.png",  new SoundAsset(() -> moddedResources.getInputStream(MOD_ID, "textures/gui/smelt.png")));
+        pack.setAsset(MOD_ID, "lang/en_us.json", new SoundAsset(() -> moddedResources.getInputStream(MOD_ID, "lang/en_us.json")));
+        pack.setAsset(MOD_ID, "textures/gui/forge_controller.png",  new TextureAsset(() -> moddedResources.getInputStream(MOD_ID, "textures/gui/forge_controller.png"), null));
+        pack.setAsset(MOD_ID, "textures/gui/fuel.png",  new TextureAsset(() -> moddedResources.getInputStream(MOD_ID, "textures/gui/fuel.png"), null));
+        pack.setAsset(MOD_ID, "textures/gui/lava.png",  new TextureAsset(() -> moddedResources.getInputStream(MOD_ID, "textures/gui/lava.png"), null));
+        pack.setAsset(MOD_ID, "textures/gui/smelt.png",  new TextureAsset(() -> moddedResources.getInputStream(MOD_ID, "textures/gui/smelt.png"), null));
     }
 
     @Override
@@ -45,6 +47,6 @@ public class PolyForgery implements PolyMcEntrypoint, ModInitializer {
     }
 
     public static Identifier id(String path) {
-        return new Identifier(MOD_ID, path);
+        return Identifier.of(MOD_ID, path);
     }
 }
