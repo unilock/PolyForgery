@@ -57,10 +57,13 @@ public class AlloyForgeryRecipeView extends AbstractRecipePolydexPage<AlloyForge
         }
 
         List<ItemStack> outputs = new ArrayList<>();
+        ItemStack base = recipe.getBaseResult();
+        base.set(DataComponentTypes.LORE, new LoreComponent(List.of(Text.translatable("polyforgery.tier_override", recipe.getMinForgeTier()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)))));
+        outputs.add(base);
         recipe.getTierOverrides().forEach((overrideRange, itemStack) -> {
-            ItemStack output = itemStack.copy();
-            output.set(DataComponentTypes.LORE, new LoreComponent(List.of(Text.translatable("polyforgery.tier_override", overrideRange.toString()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)))));
-            outputs.add(output);
+            ItemStack override = itemStack.copy();
+            override.set(DataComponentTypes.LORE, new LoreComponent(List.of(Text.translatable("polyforgery.tier_override", overrideRange.toString()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)))));
+            outputs.add(override);
         });
         builder.setOutput(6, 2, outputs.toArray(new ItemStack[0]));
     }
